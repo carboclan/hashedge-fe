@@ -5,7 +5,7 @@
       <tr class="toolbar">
         <th>{{title}}</th>
         <th colspan="3">
-          <button>ISSUE NEW</button>
+          <button v-on:click="showCreatDialog()">ISSUE NEW</button>
         </th>
       </tr>
       <tr class="header">
@@ -34,6 +34,7 @@
 <script>
 import Vue from 'vue'
 import moment from 'moment'
+import { DialogEventBus } from './DialogContainer';
 
 Vue.filter('formatDate', function(value, format) {
   format = format || 'MM/DD/YYYY';
@@ -43,9 +44,14 @@ Vue.filter('formatDate', function(value, format) {
   }
 });
 
-  export default {
+export default {
   name: 'TokenTable',
   props: ['title'],
+  methods: {
+    showCreatDialog() {
+      DialogEventBus.$emit('show-create-dialog');
+    }
+  },
   data() {
     return {
       tokens: [
