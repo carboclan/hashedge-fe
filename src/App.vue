@@ -3,21 +3,21 @@
     <div class="nav">
       <div class="brand">Hashedge</div>
       <ul class="nav-list">
-        <li class="active">
-          <a>
+        <li v-bind:class="{ active: $route.name === 'staking' }">
+          <a href="#/staking">
             <i class="material-icons">insert_drive_file</i>
             Staking
           </a>
         </li>
-        <li>
-          <a>
+        <li v-bind:class="{ active: $route.name === 'trading' }">
+          <a href="#/trading">
             <i class="material-icons">group_work</i>
             Trading
           </a>
         </li>
         <li class="sep"></li>
-        <li>
-          <a>
+        <li v-bind:class="{ active: $route.name === 'my_portfolio' }">
+          <a href="#/my_portfolio">
             <i class="material-icons">person</i>
             My Portfolio
           </a>
@@ -76,30 +76,33 @@ html, body {
       height: 32px;
       line-height: 32px;
       font-size: 16px;
-      color: #90A4AE;
 
       a {
         display: flex;
+        color: #90A4AE;
+        text-decoration: none;
 
         > * {
           align-self: center;
           vertical-align: center;
         }
-      }
 
-      .material-icons {
-        padding: 8px;
-        font-size: 16px;
-        color: #90A4AE;
+        .material-icons {
+          padding: 8px;
+          font-size: 16px;
+          color: #90A4AE;
+        }
       }
 
       &.active {
-        color: #ECEFF1;
-        background-color: #263238;
-        border-radius: 4px;
-
-        .material-icons {
+        a {
           color: #ECEFF1;
+          background-color: #263238;
+          border-radius: 4px;
+
+          .material-icons {
+            color: #ECEFF1;
+          }
         }
       }
 

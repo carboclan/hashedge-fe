@@ -7,9 +7,23 @@ Vue.use(Router)
 export default new Router({
   routes: [
     {
-      path: '/',
-      name: 'HelloWorld',
+      path: '/staking',
+      name: 'staking',
       component: HelloWorld
+    },
+    {
+      path: '/trading',
+      name: 'trading',
+      component: HelloWorld
+    },
+    {
+      path: '/my_portfolio',
+      name: 'my_portfolio',
+      component: HelloWorld
+    },
+    {
+      path: '*',
+      redirect: '/staking'
     }
   ]
 })
