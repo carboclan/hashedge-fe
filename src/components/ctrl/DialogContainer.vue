@@ -1,5 +1,5 @@
 <template>
-<div class="dialog-mask" v-bind:class="extraClass" v-bind:style="{ display: show ? 'block' : 'none' }" v-on:click="hide">
+<div class="dialog-mask" v-bind:class="extraClass" v-bind:style="{ display: show ? 'block' : 'none' }">
   <div class="dialog-container">
     <!--<slot></slot>-->
   </div>
@@ -19,14 +19,16 @@ export default {
         this.$data.show = true;
       }
     });
+
+    DialogEventBus.$on('hide', (el) => {
+      if (this.$el.isSameNode(el)) {
+        this.$data.show = false;
+      }
+    });
   },
   beforeDestroy() {
     DialogEventBus.$off('show');
-  },
-  methods: {
-    hide() {
-      this.$data.show = false;
-    }
+    DialogEventBus.$off('hide');
   },
   data() {
     return {
