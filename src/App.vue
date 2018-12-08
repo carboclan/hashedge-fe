@@ -48,9 +48,16 @@ html, body {
   font-family: 'Roboto Condensed', 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  display: flex;
+
+  div:last-child {
+    flex: 1 1 auto;
+    color: white;
+  }
 }
 
 .nav {
+  flex: 0 1 auto;
   margin: 56px 84px;
   width: 221px;
   height: 189px;
