@@ -48,11 +48,12 @@ html, body {
   -moz-osx-font-smoothing: grayscale;
   display: flex;
 
-  div:last-child {
+  >div:last-child {
     flex: 1 1 auto;
+    max-width: 805px;
     color: white;
 
-    > .title {
+    >.title {
       height: 48px;
       line-height: 48px;
       margin: 84px 0 24px 0;
@@ -62,6 +63,17 @@ html, body {
       color: #ECEFF1;
     }
   }
+}
+
+.sep {
+  height: 0!important;
+  border-top: 1px solid #546E7A;
+}
+
+ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
 }
 </style>
 
@@ -121,11 +133,6 @@ html, body {
             color: #ECEFF1;
           }
         }
-      }
-
-      &.sep {
-        height: 0;
-        border-top: 1px solid #546E7A;
       }
     }
   }
