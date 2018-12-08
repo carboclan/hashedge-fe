@@ -34,16 +34,14 @@ export default {
 }
 </script>
 
-<style>
+<style lang="scss">
 html, body {
   background-color: #364851;
   margin: 0;
   padding: 0;
   vertical-align: middle;
 }
-</style>
 
-<style scoped lang="scss">
 #app {
   font-family: 'Roboto Condensed', 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -53,12 +51,24 @@ html, body {
   div:last-child {
     flex: 1 1 auto;
     color: white;
+
+    > .title {
+      height: 48px;
+      line-height: 48px;
+      margin: 84px 0 24px 0;
+      font-size: 16px;
+      letter-spacing: 0.05em;
+
+      color: #ECEFF1;
+    }
   }
 }
+</style>
 
+<style scoped lang="scss">
 .nav {
   flex: 0 1 auto;
-  margin: 56px 84px;
+  margin: 84px 56px;
   width: 221px;
   height: 189px;
 

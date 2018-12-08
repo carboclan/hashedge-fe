@@ -1,6 +1,8 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import HelloWorld from '@/components/HelloWorld'
+import Staking from '@/components/Staking'
+import Trading from '@/components/Trading'
+import MyPortfolio from '@/components/MyPortfolio'
 
 Vue.use(Router)
 
@@ -9,17 +11,17 @@ export default new Router({
     {
       path: '/staking',
       name: 'staking',
-      component: HelloWorld
+      component: Staking
     },
     {
       path: '/trading',
       name: 'trading',
-      component: HelloWorld
+      component: Trading
     },
     {
       path: '/my_portfolio',
       name: 'my_portfolio',
-      component: HelloWorld
+      component: MyPortfolio
     },
     {
       path: '*',
