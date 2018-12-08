@@ -36,7 +36,7 @@ export default {
 
 <style lang="scss">
 html, body {
-  background-color: #364851;
+  background-color: #455A64;
   margin: 0;
   padding: 0;
   vertical-align: middle;
