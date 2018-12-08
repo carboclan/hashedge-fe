@@ -27,12 +27,19 @@
       </ul>
     </div>
   </div>
+
+  <div class="sep" style="margin: 15px 0;"></div>
+
+  <TokenTable title="Portfolio"></TokenTable>
 </div>
 </template>
 
 <script>
+import TokenTable from './ctrl/TokenTable';
+
 export default {
-  name: 'Staking'
+  name: 'Staking',
+  components: {TokenTable}
 }
 </script>
 

@@ -39,6 +39,7 @@ html, body {
   background-color: #455A64;
   margin: 0;
   padding: 0;
+  height: 100%;
   vertical-align: middle;
 }
 
@@ -47,11 +48,15 @@ html, body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   display: flex;
+  height: 100%;
 
   >div:last-child {
     flex: 1 1 auto;
     max-width: 805px;
     color: white;
+    padding: 0 16px 16px 0;
+    height: 100%;
+    overflow: scroll;
 
     >.title {
       height: 48px;
