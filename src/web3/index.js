@@ -13,7 +13,17 @@ export async function listExchanges(filter) {
     const xhgAddr = await hashedgeFactory.tokenToExchangeLookup(tokenAddr);
     const exchange = web3.loadContract(abi.uniswapExchange, xhgAddr);
 
-    if (!filter || filter(xhg)) ret.push({ token, exchange });
+    if (!filter || filter(xhg)) ret.push({
+      name: await token.name(),
+      symbol: await token.symbol(),
+      totalSupply: await token.totalSupply(),
+      target: await exchange.target(),
+      startTs: await token.startTs(),
+      endTs: await token.endTs(),
+      hashType: await token.hashType(),
+      hashRateUnit: await token.hashRateUnit(),
+      tokenSize: await token.tokenSize()
+    });
   }
 
   return ret;

@@ -13,7 +13,7 @@
       </tr>
     </thead>
     <tbody>
-      <tr class="token" v-for="token of tokens" v-bind:class="token.hashType">
+      <tr class="token" v-for="token of data" v-bind:class="token.hashType">
         <td>
           <div><span class="hashtype">{{token.hashType}}</span></div>
           <div>{{token.name}}</div>
@@ -23,7 +23,7 @@
           <div class="progress">
             <div v-bind:style="{ width: Math.min(token.totalSupply / token.target * 100, 105) + '%' }"></div>
           </div>
-          <div class="desc">{{token.totalSupply}}/{{token.target}} staked</div>
+          <div class="desc">{{token.totalSupply | eth}} / {{token.target | eth}} staked</div>
         </td>
       </tr>
     </tbody>
@@ -34,6 +34,7 @@
 <script>
 import Vue from 'vue'
 import moment from 'moment'
+import { web3 } from '../../web3';
 import { DialogEventBus } from './DialogContainer';
 
 Vue.filter('formatDate', function(value, format) {
@@ -44,9 +45,14 @@ Vue.filter('formatDate', function(value, format) {
   }
 });
 
+Vue.filter('eth', function (value, opt) {
+  opt = opt || {};
+  return (!opt.hideEth && 'Ξ ' || '') + web3.fromWei(value).toNumber().toFixed(opt.decimals || 5);
+});
+
 export default {
   name: 'TokenTable',
-  props: ['title'],
+  props: ['title', 'data'],
   methods: {
     showCreatDialog() {
       DialogEventBus.$emit('show-create-dialog');
