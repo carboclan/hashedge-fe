@@ -21,14 +21,15 @@
         </td>
         <td class="desc">30days</td>
         <td>
-          <div class="progress">
+          <div class="progress" v-on:click="showTradeDialog(token)">
             <div v-bind:style="{ width: Math.min(token.totalSupply / token.target * 100, 105) + '%' }"></div>
           </div>
-          <div class="desc">{{token.totalSupply | eth}} / {{token.target | eth}} staked</div>
+          <div class="desc" v-on:click="showTradeDialog(token)">{{token.totalSupply | eth}} / {{token.target | eth}} staked</div>
         </td>
       </tr>
     </tbody>
   </table>
+  <trade-dialog></trade-dialog>
 </div>
 </template>
 
@@ -37,6 +38,7 @@ import Vue from 'vue'
 import moment from 'moment'
 import { web3 } from '../../web3';
 import { DialogEventBus } from './DialogContainer';
+import TradeDialog from './TradeDialog';
 
 Vue.filter('formatDate', function(value, format) {
   format = format || 'MM/DD/YYYY';
@@ -58,20 +60,18 @@ Vue.filter('bn', function (value) {
 export default {
   name: 'TokenTable',
   props: ['title', 'data'],
+  components: { TradeDialog },
   methods: {
     showCreatDialog() {
       DialogEventBus.$emit('show-create-dialog');
+    },
+    showTradeDialog(token) {
+      DialogEventBus.$emit('show-trade-dialog', token);
     }
   },
   data() {
     return {
-      tokens: [
-        { name: 'BTC • Dec • 07.12.2018', hashType: 'POW', totalSupply: 3.7, target: 4, startTs: new Date(), endTs: Date.now() + 3600 * 1000 * 24 * 30  },
-        { name: 'ETH • Jan • 07.12.2018', hashType: 'POW', totalSupply: 2.7, target: 4, startTs: new Date(), endTs: Date.now() + 3600 * 1000 * 24 * 30  },
-        { name: 'FLC • Feb • 07.12.2018', hashType: 'POST', totalSupply: 6, target: 6, startTs: new Date(), endTs: Date.now() + 3600 * 1000 * 24 * 30  },
-        { name: 'EOS • Mar • 07.12.2018', hashType: 'DPOS', totalSupply: 3.3, target: 4, startTs: new Date(), endTs: Date.now() + 3600 * 1000 * 24 * 30  },
-        { name: 'NAV • Apr • 07.12.2018', hashType: 'POS', totalSupply: 4.5, target: 4, startTs: new Date(), endTs: Date.now() + 3600 * 1000 * 24 * 30  }
-      ]
+      tokens: []
     };
   }
 }

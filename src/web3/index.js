@@ -11,9 +11,12 @@ export async function listExchanges(filter) {
     const tokenAddr = await hashedgeFactory.tokenList(i);
     const token = web3.loadContract(abi.hashRateOptionsToken, tokenAddr);
     const xhgAddr = await hashedgeFactory.tokenToExchangeLookup(tokenAddr);
-    const exchange = web3.loadContract(abi.uniswapExchange, xhgAddr);
+    const exchange = await web3.loadContract(abi.uniswapExchange, xhgAddr);
+    console.log(xhgAddr, exchange.target, exchange.balanceOf);
 
     if (!filter || filter(xhg)) ret.push({
+      token,
+      exchange,
       name: await token.name(),
       symbol: await token.symbol(),
       totalSupply: await token.totalSupply(),
