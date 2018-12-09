@@ -1,12 +1,20 @@
-const { web3 } = require('web3-api-wrap');
+import { web3 } from 'web3-api-wrap';
 const abi = require('./abi.json');
+const hashedgeFactory = web3.loadContract(abi.hashedgeFactory, '0x345ca3e014aaf5dca488057592ee47305d9b3e10');
 
-setTimeout(() => {
-  web3.eth.defaultAccount = web3.eth;
-}, 100);
+export { web3, abi, hashedgeFactory };
 
-module.exports = {
-  web3,
-  abi,
-  hashedgeFactory: web3.loadContract(abi.hashedgeFactory, '0x345ca3e014aaf5dca488057592ee47305d9b3e10')
-};
+export async function listExchanges(filter) {
+  const cnt = (await hashedgeFactory.getExchangeCount()).toNumber();
+  const ret = [];
+  for (let i = 0; i < cnt; i++) {
+    const tokenAddr = await hashedgeFactory.tokenList(i);
+    const token = web3.loadContract(abi.hashRateOptionsToken, tokenAddr);
+    const xhgAddr = await hashedgeFactory.tokenToExchangeLookup(tokenAddr);
+    const exchange = web3.loadContract(abi.uniswapExchange, xhgAddr);
+
+    if (!filter || filter(xhg)) ret.push({ token, exchange });
+  }
+
+  return ret;
+}
