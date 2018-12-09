@@ -17,6 +17,7 @@
         <td>
           <div><span class="hashtype">{{token.hashType}}</span></div>
           <div>{{token.name}}</div>
+          <div class="desc">{{token.tokenSize | bn}} {{token.hashRateUnit}}</div>
         </td>
         <td class="desc">30days</td>
         <td>
@@ -48,6 +49,10 @@ Vue.filter('formatDate', function(value, format) {
 Vue.filter('eth', function (value, opt) {
   opt = opt || {};
   return (!opt.hideEth && 'Ξ ' || '') + web3.fromWei(value).toNumber().toFixed(opt.decimals || 5);
+});
+
+Vue.filter('bn', function (value) {
+  return value.toNumber();
 });
 
 export default {
