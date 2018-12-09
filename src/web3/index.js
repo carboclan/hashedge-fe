@@ -1,6 +1,10 @@
 const { web3 } = require('web3-api-wrap');
 const abi = require('./abi.json');
 
+setTimeout(() => {
+  web3.eth.defaultAccount = web3.eth;
+}, 100);
+
 module.exports = {
   web3,
   abi,

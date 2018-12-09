@@ -5,6 +5,8 @@
   </div>
   <div class="sep"></div>
   <div class="params">
+    <input type="text" placeholder="Token Name" v-model="name">
+    <input type="text" placeholder="Token Symbol" v-model="symbol">
     <select v-model="hashType">
       <option value="POW">POW</option>
       <option value="POS">POS</option>
@@ -47,6 +49,7 @@
 </template>
 
 <script>
+import { web3, hashedgeFactory } from '../../web3';
 import DialogContainer, { DialogEventBus } from './DialogContainer';
 
 export default {
@@ -64,12 +67,23 @@ export default {
     hide() {
       DialogEventBus.$emit('hide', this.$el);
     },
-    submit() {
+    async submit() {
+      const { name, symbol, hashType, currencyType, tokenSize, hashUnit, strikePrice, duration, totalSupply, target } = this.$data;
+      const recpt = await hashedgeFactory.createExchange(
+        web3.toWei(target, 'ether'), name, symbol,
+        totalSupply, hashType, currencyType, hashUnit, tokenSize,
+        Date.now() / 1000 + 24 * 3600, Date.now() / 1000 + 24 * 3600 * (duration + 1), web3.toWei(strikePrice, 'ether')
+      );
 
+      await web3.eth.getTransactionReceipt(recpt);
+      alert('success');
+      DialogEventBus.$emit('hide', this.$el);
     }
   },
   data() {
     return {
+      name: null,
+      symbol: null,
       show: false,
       hashType: 'POW',
       currencyType: 'BTC',
