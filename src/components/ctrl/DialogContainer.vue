@@ -1,7 +1,7 @@
 <template>
-<div class="dialog-mask" v-bind:class="extraClass" v-bind:style="{ display: show ? 'block' : 'none' }">
+<div class="dialog-mask" v-bind:class="extraClass" v-bind:style="{ display: show ? 'flex' : 'none' }">
   <div class="dialog-container">
-    <!--<slot></slot>-->
+    <slot></slot>
   </div>
 </div>
 </template>
@@ -40,11 +40,17 @@ export default {
 
 <style scoped>
 .dialog-mask {
+  justify-content:center;
+  align-items: center;
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
   background-color: rgba(255, 255, 255, 0.3);
+}
+
+.dialog-container {
+  border-radius: 4px;
 }
 </style>
